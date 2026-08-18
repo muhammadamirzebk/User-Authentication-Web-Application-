@@ -1,0 +1,50 @@
+<%- include('partials/header') %>
+
+<div class="card wide-card">
+  <div class="profile-head">
+    <div class="avatar"><%= user.name.charAt(0).toUpperCase() %></div>
+    <div>
+      <h1><%= user.name %></h1>
+      <p class="subtitle">Your account information, loaded live from MongoDB.</p>
+    </div>
+  </div>
+
+  <table class="info-table">
+    <tbody>
+      <tr>
+        <th>Name</th>
+        <td><%= user.name %></td>
+      </tr>
+      <tr>
+        <th>Email</th>
+        <td><%= user.email %></td>
+      </tr>
+      <tr>
+        <th>Account created</th>
+        <td>
+          <%= new Date(user.createdAt).toLocaleString('en-GB', {
+                day: '2-digit', month: 'long', year: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+              }) %>
+        </td>
+      </tr>
+      <tr>
+        <th>User ID (MongoDB _id)</th>
+        <td><code><%= user._id %></code></td>
+      </tr>
+      <tr>
+        <th>Password</th>
+        <td><span class="muted">Stored as a bcrypt hash &mdash; never in plain text</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <a href="/dashboard" class="btn btn-primary">Back to dashboard</a>
+    <form action="/logout" method="POST" class="inline-form">
+      <button type="submit" class="btn btn-outline">Logout</button>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

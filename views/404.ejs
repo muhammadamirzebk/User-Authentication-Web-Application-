@@ -1,0 +1,21 @@
+<%- include('partials/header') %>
+
+<div class="card center-card">
+  <div class="big-code">404</div>
+  <h1>Page not found</h1>
+  <p class="subtitle">
+    The page you requested does not exist. Check the address or go back to a
+    page you have access to.
+  </p>
+
+  <div class="actions center">
+    <% if (locals.currentUser) { %>
+      <a href="/dashboard" class="btn btn-primary">Go to dashboard</a>
+    <% } else { %>
+      <a href="/login" class="btn btn-primary">Go to login</a>
+      <a href="/register" class="btn btn-outline">Register</a>
+    <% } %>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,50 @@
+<%- include('partials/header') %>
+
+<div class="card wide-card">
+  <div class="badge badge-success">Authenticated session active</div>
+
+  <h1 class="dash-title">Welcome, <%= user.name %> 👋</h1>
+  <p class="subtitle">
+    You are logged in. This page is protected by the custom authentication
+    middleware, so it can only be opened with a valid session.
+  </p>
+
+  <div class="grid">
+    <div class="tile">
+      <span class="tile-label">Signed in as</span>
+      <span class="tile-value"><%= user.name %></span>
+    </div>
+    <div class="tile">
+      <span class="tile-label">Email</span>
+      <span class="tile-value"><%= user.email %></span>
+    </div>
+    <div class="tile">
+      <span class="tile-label">Member since</span>
+      <span class="tile-value">
+        <%= new Date(user.createdAt).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) %>
+      </span>
+    </div>
+    <div class="tile">
+      <span class="tile-label">Status</span>
+      <span class="tile-value ok">Active</span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <a href="/profile" class="btn btn-primary">View my profile</a>
+    <form action="/logout" method="POST" class="inline-form">
+      <button type="submit" class="btn btn-outline">Logout</button>
+    </form>
+  </div>
+
+  <div class="flow-box">
+    <h2>How this page was served</h2>
+    <p class="flow">
+      Browser <span>&rarr;</span> Express <span>&rarr;</span> Auth Middleware
+      <span>&rarr;</span> Controller <span>&rarr;</span> User Model
+      <span>&rarr;</span> MongoDB <span>&rarr;</span> EJS View
+    </p>
+  </div>
+</div>
+
+<%- include('partials/footer') %>

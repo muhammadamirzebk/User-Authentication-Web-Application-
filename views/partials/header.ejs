@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= typeof title !== 'undefined' ? title : 'Auth App' %> | User Authentication App</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128274;</text></svg>" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="<%= locals.currentUser ? '/dashboard' : '/login' %>">
+        <span class="brand-mark">A</span>
+        <span class="brand-text">AuthApp</span>
+      </a>
+
+      <nav class="nav-links">
+        <% if (locals.currentUser) { %>
+          <a href="/dashboard" class="<%= locals.path === '/dashboard' ? 'active' : '' %>">Dashboard</a>
+          <a href="/profile" class="<%= locals.path === '/profile' ? 'active' : '' %>">Profile</a>
+          <form action="/logout" method="POST" class="inline-form">
+            <button type="submit" class="btn btn-ghost btn-sm">Logout</button>
+          </form>
+        <% } else { %>
+          <a href="/login" class="<%= (locals.path === '/login' || locals.path === '/') ? 'active' : '' %>">Login</a>
+          <a href="/register" class="<%= locals.path === '/register' ? 'active' : '' %>">Register</a>
+        <% } %>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <% if (locals.flash && locals.flash.message) { %>
+      <div class="alert alert-<%= locals.flash.type === 'success' ? 'success' : 'error' %>" role="status">
+        <%= locals.flash.message %>
+      </div>
+    <% } %>
