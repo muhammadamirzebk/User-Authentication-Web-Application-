@@ -19,7 +19,7 @@ const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
-const MongoStore = require('connect-mongo');
+const MongoStore = require('connect-mongo').default ?? require('connect-mongo');
 
 const connectDB = require('./config/db');
 const requestLogger = require('./middleware/logger');
